@@ -3,9 +3,8 @@ import pygame
 import  os, sys
 import shutil
 from PIL import Image
-from  moviepy.editor import *
-
-
+import mplayer
+import time
 
 
 def resize(path, size):
@@ -33,11 +32,29 @@ def resize(path, size):
 
 
 def display_images(path, fps):
+
     sequence = ImageSequenceClip(path, fps)
-    sequence.preview()
+    sequence.preview(fullscreen=True)
+    shutil.rmtree( path )   # clean up
+    pygame.quit()
 
-def display_videos(path):
 
+
+
+def display_videos(path):     
+
+     player = mplayer.Player()
+
+     for file in os.listdir(path):
+           video_file = os.path.join(path, file)
+           player.loadfile(video_file)
+           player.fullscreen = True
+           t1 = time.time()
+           while  not player.length: 
+                 pass
+           t2 = time.time()
+
+           time.sleep(int(player.length + t2 - t1) )  
 
 
 
@@ -56,13 +73,13 @@ if __name__ == '__main__':
 
     pygame.display.set_mode(size)
 
-    display_images(temp_path, fps)
-
-#     clip = VideoFileClip('video.mp4')
-#     clip.preview()
+    display_images(temp_path, fps=1)
 
 
-#     pygame.quit()
+    display_videos(videos_path)
+
+
+
 
 
 

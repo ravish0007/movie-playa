@@ -6,9 +6,10 @@ A little excersise with images and video files
 
 ### Install requirements
 
-<code> python3 install -r reqiurements.txt </code>
+<code> python3 install -r requirements.txt </code>
 
 <br>
+
 ### Place your Images and Videos in respective folders in "files"
 
 <br>

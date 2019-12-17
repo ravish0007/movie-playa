@@ -10,7 +10,7 @@ from  moviepy.editor import *
 
 def resize(path, size):
     
-    temp_path = os.path.join("files", ".temp")
+    temp_path = os.path.join("files", "temp")
     
     if os.path.isdir(temp_path):
         shutil.rmtree( temp_path )
@@ -32,10 +32,11 @@ def resize(path, size):
 
 
 
-def display(path):
-    sequence = ImageSequenceClip(path, fps=1)
+def display_images(path, fps):
+    sequence = ImageSequenceClip(path, fps)
     sequence.preview()
 
+def display_videos(path):
 
 
 
@@ -46,17 +47,17 @@ if __name__ == '__main__':
     pygame.display.set_caption('Video player')
 
     size = tuple(map(int,os.popen('xrandr | grep "*"').readline().strip().split()[0].split('x') ))
-    
+
     print(size)
-    pygame.display.set_mode(size)
     images_path = os.path.join("files", "images")
-    
+    videos_path = os.path.join("files", "videos")
+
     temp_path = resize(images_path, size)
-    
-    
-    
-    display(temp_path)
-    
+
+    pygame.display.set_mode(size)
+
+    display_images(temp_path, fps)
+
 #     clip = VideoFileClip('video.mp4')
 #     clip.preview()
 
